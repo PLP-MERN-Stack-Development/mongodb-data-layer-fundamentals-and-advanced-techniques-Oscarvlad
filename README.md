@@ -1,59 +1,93 @@
-# MongoDB Fundamentals - Week 1
 
-## Setup Instructions
+# 🎯 Project Overview
 
-Before you begin this assignment, please make sure you have the following installed:
+The plp_bookstore database models a simple digital bookstore inventory system. Each book document includes essential metadata such as:
 
-1. **MongoDB Community Edition** - [Installation Guide](https://www.mongodb.com/docs/manual/administration/install-community/)
-2. **MongoDB Shell (mongosh)** - This is included with MongoDB Community Edition
-3. **Node.js** - [Download here](https://nodejs.org/)
+- `title` (string)
+- `author` (string)
+- `genre` (string)
+- `published_year` (number)
+- `price` (number)
+- `in_stock` (boolean)
+- `pages` (number)
+- `publisher` (string)
 
-### Node.js Package Setup
+This project fulfills all requirements of the PLP MongoDB assignment, showcasing:
 
-Once you have Node.js installed, run the following commands in your assignment directory:
+- Proper data modeling with realistic sample data
+- Efficient querying and filtering
+- Data transformation via aggregation
+- Performance optimization using indexes
+- Real-world database operations
+
+## Repository Structure
+
+plp-bookstore/
+├── insert_books.js # Inserts 12+ sample book documents into the 'books' collection
+├── queries.js # All MongoDB queries: CRUD, advanced, aggregation, indexing
+├── README.md # This comprehensive guide
+└── mongodb_compass_screenshot.png # Screenshot showing sample data in Atlas
+
+## Prerequisites
+
+- MongoDB Atlas account
+- MongoDB Compass (optional, for visual interface)
+- MongoDB Shell (mongosh)
+
+### Step 1: Set Up MongoDB Atlas
+
+1. **Create Atlas Account**
+   - Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+   - Sign up for a free account
+
+2. **Create Cluster**
+   - Click "Build a Database"
+   - Choose FREE tier (M0)
+   - Select cloud provider and region
+   - Click "Create"
+
+3. **Configure Database Access**
+   - Go to "Database Access" → "Add New Database User"
+   - Username: plpuser (or your preferred name)
+   - Password: Create a secure password
+   - Privileges: "Read and write to any database"
+
+4. **Network Access**
+   - Go to "Network Access" → "Add IP Address"
+   - Select "Allow Access from Anywhere" (0.0.0.0/0)
+   - Click "Confirm"
+
+5. **Get Connection String**
+   - Go to "Clusters" → Click "Connect"
+   - Choose "Connect your application"
+   - Copy the connection string
+
+### Step 2: Run the Project
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <your-repository-url>
+   cd plp-bookstore
+   ```
+
+1. **Update Connection String**
+
+   -Edit both insert_books.js and queries.js
+   -Replace the connection string with your Atlas connection string:
+
+   ```bash
+   const conn = new Mongo("mongodb+srv://username:password@cluster.xxx.mongodb.net/");
+   ```
+
+1. **Insert Sample Data**
 
 ```bash
-# Initialize a package.json file
-npm init -y
-
-# Install the MongoDB Node.js driver
-npm install mongodb
+mongosh "your-connection-string" < insert_books.js
 ```
 
-## Assignment Overview
+1. **Execute All Queries**
 
-This week focuses on MongoDB fundamentals including:
-- Creating and connecting to MongoDB databases
-- CRUD operations (Create, Read, Update, Delete)
-- MongoDB queries and filters
-- Aggregation pipelines
-- Indexing for performance
-
-## Submission
-
-Complete all the exercises in this assignment and push your code to GitHub using the provided GitHub Classroom link.
-
-## Getting Started
-
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install MongoDB locally or set up a MongoDB Atlas account
-4. Run the provided `insert_books.js` script to populate your database
-5. Complete the tasks in the assignment document
-
-## Files Included
-
-- `Week1-Assignment.md`: Detailed assignment instructions
-- `insert_books.js`: Script to populate your MongoDB database with sample book data
-
-## Requirements
-
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- MongoDB Shell (mongosh) or MongoDB Compass
-
-## Resources
-
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [MongoDB University](https://university.mongodb.com/)
-- [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/) 
+```bash
+mongosh "your-connection-string" < queries.js
+```
